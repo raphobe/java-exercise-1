@@ -1,37 +1,40 @@
 package com.martinezmanor.fib;
 
-public class FibCalc
+import java.util.HashMap;
+import java.util.Map;
+
+public class FibCalc implements IFibCalc
 {
-    public int fibWorse(int x) 
+  Map<Integer, Integer> fibCache = new HashMap<Integer, Integer>();
+  
+    public int fib(int x) 
     {
-      if (x <= 2)
-      {
+      if(x <=2 )
+      { 
         return 1;
       }
-      else
-      {
-        return fib(x-1) + fib(x-2);
-      }
+
+      return fib(x-1) +fib(x-2);
     }
 
-    public int fib(int x)
+    public int fibBetter(int x)
     {
-         double sqrt5 = Math.pow(5, 0.5);
-
-         double fibNumber = (alphaToPower(x) - betaToPower(x))/sqrt5;
-         Integer fibNumberAsInt = (int)Math.round(fibNumber);
-         return fibNumberAsInt;
+      double fibNumber = (alphaToPower(x) - betaToPower(x))/SQRT5;
+      Integer fibNumberAsInt = (int)Math.round(fibNumber);
+      return fibNumberAsInt;
     }
 
+    private static final double SQRT5 = Math.pow(5, 0.5);
+    private static final double ALPHA = (1 + SQRT5)/2;
+    private static final double BETA = (1 - SQRT5)/2;
+ 
     private double alphaToPower(int x)
     {
-      double alpha = 1.618003988;
-      return Math.pow(alpha, x);
+      return Math.pow(ALPHA, x);
     }
 
     private double betaToPower(int x)
     {
-      double beta = -0.618003988;
-      return Math.pow(beta, x);
+      return Math.pow(BETA, x);
     }
 }
